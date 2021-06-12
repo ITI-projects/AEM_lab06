@@ -78,7 +78,7 @@ def main(path):
     coordinates = loaded_data.get_coords()
     drawing = DrawPlot(coordinates)
     matrix = loaded_data.calculate_distance_matrix()
-    number_of_tests = 20
+    number_of_tests = 1000
     path_length = 100
     print("Greedy edge")
     min_path = test(matrix, GreedyEdgesAlgorithm, number_of_tests, path_length, path)

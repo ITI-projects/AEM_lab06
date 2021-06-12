@@ -21,6 +21,178 @@ def edges_similarity(path_1, path_2):
 
 
 def main():
+    with open('kroA100.tspstats.json', 'r') as json_file:
+        js = json.load(json_file)
+
+        # -------------------------------------- VERTICES TO BEST
+        list_target = []
+        list_similarity = []
+        best_dist = js["best_distance"]
+        best_path = js["best_path"]
+        for i in range(0, len(js["distances"])):
+            if js["paths"][i] != best_path:
+                list_target.append(js["distances"][i])
+                list_similarity.append(vertex_similarity(js["paths"][i], best_path))
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROA100 - Vertices similarity to best, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROA100 - Vertices similarity to best.png')
+        plot.show()
+
+        # -------------------------------------- EDGE TO BEST
+        list_target = []
+        list_similarity = []
+        best_dist = js["best_distance"]
+        best_path = js["best_path"]
+        for i in range(0, len(js["distances"])):
+            if js["paths"][i] != best_path:
+                list_target.append(js["distances"][i])
+                list_similarity.append(edges_similarity(js["paths"][i], best_path))
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROA100 - Edges similarity to best, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROA100 - Edges similarity to best.png')
+        plot.show()
+
+        # -------------------------------------- VERTICES TO MEDIUM
+        list_target = []
+        list_similarity = []
+        for i in range(0, len(js["distances"])):
+            med = 0
+            for j in range(0, len(js["distances"])):
+                if i != j:
+                    med += vertex_similarity(js["paths"][i], js["paths"][j])
+            list_similarity.append(med/(len(js["distances"])-1))
+            list_target.append(js["distances"][i])
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROA100 - Vertices similarity to mean, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROA100 - Vertices similarity to mean.png')
+        plot.show()
+
+        # -------------------------------------- EDGE TO MEDIUM
+
+        list_target = []
+        list_similarity = []
+        for i in range(0, len(js["distances"])):
+            med = 0
+            for j in range(0, len(js["distances"])):
+                if i != j:
+                    med += edges_similarity(js["paths"][i], js["paths"][j])
+            list_similarity.append(med / (len(js["distances"]) - 1))
+            list_target.append(js["distances"][i])
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROA100 - Edges similarity to mean, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROA100 - Edges similarity to mean.png')
+        plot.show()
+
+    with open('kroB100.tspstats.json', 'r') as json_file:
+        js = json.load(json_file)
+
+        # -------------------------------------- VERTICES TO BEST
+        list_target = []
+        list_similarity = []
+        best_dist = js["best_distance"]
+        best_path = js["best_path"]
+        for i in range(0, len(js["distances"])):
+            if js["paths"][i] != best_path:
+                list_target.append(js["distances"][i])
+                list_similarity.append(vertex_similarity(js["paths"][i], best_path))
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROB100 - Vertices similarity to best, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROB100 - Vertices similarity to best.png')
+        plot.show()
+
+        # -------------------------------------- EDGE TO BEST
+        list_target = []
+        list_similarity = []
+        best_dist = js["best_distance"]
+        best_path = js["best_path"]
+        for i in range(0, len(js["distances"])):
+            if js["paths"][i] != best_path:
+                list_target.append(js["distances"][i])
+                list_similarity.append(edges_similarity(js["paths"][i], best_path))
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROB100 - Edges similarity to best, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROB100 - Edges similarity to best.png')
+        plot.show()
+
+        # -------------------------------------- VERTICES TO MEDIUM
+        list_target = []
+        list_similarity = []
+        for i in range(0, len(js["distances"])):
+            med = 0
+            for j in range(0, len(js["distances"])):
+                if i != j:
+                    med += vertex_similarity(js["paths"][i], js["paths"][j])
+            list_similarity.append(med / (len(js["distances"]) - 1))
+            list_target.append(js["distances"][i])
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROB100 - Vertices similarity to mean, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROB100 - Vertices similarity to mean.png')
+        plot.show()
+
+        # -------------------------------------- EDGE TO MEDIUM
+
+        list_target = []
+        list_similarity = []
+        for i in range(0, len(js["distances"])):
+            med = 0
+            for j in range(0, len(js["distances"])):
+                if i != j:
+                    med += edges_similarity(js["paths"][i], js["paths"][j])
+            list_similarity.append(med / (len(js["distances"]) - 1))
+            list_target.append(js["distances"][i])
+        print(list_similarity)
+        print(list_target)
+
+        corel, _ = stats.pearsonr(list_target, list_similarity)
+        print(corel)
+        plot.title("KROB100 - Edges similarity to mean, corel: " + str(corel))
+        plot.scatter(list_target, list_similarity)
+
+        plot.savefig('images/KROB100 - Edges similarity to mean.png')
+        plot.show()
+
     with open('kroA200.tspstats.json', 'r') as json_file:
         js = json.load(json_file)
 
